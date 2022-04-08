@@ -37,6 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # local
+    'api.apps.ApiConfig',
+    'users.apps.UsersConfig',
+    'drugs.apps.DrugsConfig',
+
+    # 3rd party
     'rest_framework',
 ]
 
@@ -132,3 +139,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
 #    ]
 # }
+
+AUTH_USER_MODEL = 'users.User'
