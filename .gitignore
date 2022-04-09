@@ -1,0 +1,7 @@
+media/
+.vscode/
+*.pyc
+*.db
+*.sqlite3
+static
+Pipfile
