@@ -20,10 +20,10 @@ class PackSizeLabel(models.Model):
 
 class DataSource(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    url = models.URLField(null=True)
+    url = models.URLField(null=True, default='')
 
     def __str__(self):
-        return self.label
+        return self.name
 
 class DrugType(models.Model):
     type = models.CharField(max_length=30, unique=True)
@@ -41,10 +41,10 @@ class Drug(models.Model):
     rx_required = models.BooleanField(verbose_name='Prescription Required', null=True)
     short_composition = models.ForeignKey(to=DrugComposition, on_delete=models.PROTECT, related_name='composition')
     is_discontinued = models.BooleanField()
-    data_source = models.ForeignKey(to = DataSource, on_delete=models.PROTECT, related_name='source')
+    data_source = models.ForeignKey(to = DataSource, on_delete=models.PROTECT, related_name='source', default=1)
     created_on = models.DateTimeField(auto_now_add = True)
     modified_on = models.DateTimeField(auto_now = True)
 
     def __str__(self):
-        return f'{self.data_source}-{self.sku_id}-{self.Name}-{self.manufacturer_name}'
+        return f'{self.data_source}-{self.sku_id}-{self.name}-{self.manufacturer_name}'
 
