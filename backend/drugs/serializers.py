@@ -41,7 +41,7 @@ class DataSourceSerializer(serializers.ModelSerializer):
             'name': {'validators': []},
         }
 
-class DrugSerializer(serializers.ModelSerializer):
+class DrugSerializer(serializers.HyperlinkedModelSerializer):
     manufacturer_name = ManufacturerSerializer()
     type = DrugTypeSerializer()
     pack_size_label = PackSizeSerializer()
@@ -49,7 +49,7 @@ class DrugSerializer(serializers.ModelSerializer):
     data_source = DataSourceSerializer()
     
     class Meta:
-        fields = ('sku_id', 'name', 'manufacturer_name', 'type', 
+        fields = ('url', 'sku_id', 'name', 'manufacturer_name', 'type', 
             'pack_size_label', 'price', 'rx_required', 'short_composition',
              'is_discontinued', 'data_source', 'created_on', 'modified_on')
         model = Drug
