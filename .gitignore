@@ -10,4 +10,5 @@ static
 
 #virtual env related stuff
 Pipfile
+
 .venv
