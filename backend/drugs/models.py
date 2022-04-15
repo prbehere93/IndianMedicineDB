@@ -5,7 +5,7 @@ class TimeStampedModel(models.Model):
     An abstract model which provides each model with a created and modified field
     """
     created_on=models.DateTimeField(auto_now_add=True)
-    modified_on=models.DecimalField(auto_now=True)
+    modified_on=models.DateTimeField(auto_now=True)
     
     class Meta:
         abstract=True
@@ -30,16 +30,16 @@ class PackSizeLabel(TimeStampedModel):
 
 class DataSource(TimeStampedModel):
     name = models.CharField(max_length=50, unique=True)
-    url = models.URLField(null=True) #how to show that the datasource was entered by a user?
+    url = models.URLField(null=True, blank=True) #how to show that the datasource was entered by a user?
     
     def __str__(self):
-        return self.label
+        return self.name
 
 class DrugType(TimeStampedModel):
     type_of_drug = models.CharField(max_length=30, unique=True)
 
     def __str__(self):
-        return self.type
+        return self.type_of_drug
 
 class Drug(TimeStampedModel):
     sku_id = models.IntegerField(verbose_name='SKU ID', primary_key=True, db_index=True)
@@ -54,5 +54,5 @@ class Drug(TimeStampedModel):
     data_source = models.ForeignKey(to = DataSource, on_delete=models.PROTECT, related_name='source')
 
     def __str__(self):
-        return f'{self.data_source}-{self.sku_id}-{self.Name}-{self.manufacturer_name}'
+        return f'{self.data_source}-{self.sku_id}-{self.name}-{self.manufacturer_name}'
 

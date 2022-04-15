@@ -1,3 +1,4 @@
+from rest_framework.response import Response
 from rest_framework import serializers
 from .models import Drug, Manufacturer, PackSizeLabel, DataSource, DrugComposition, DrugType
 
@@ -14,7 +15,7 @@ class PackSizeSerializer(serializers.ModelSerializer):
 class DrugTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = DrugType
-        fields = ('type',)
+        fields = ('type_of_drug',)
 
 class DrugCompositionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -53,10 +54,13 @@ class DrugSerializer(serializers.ModelSerializer):
         data_source_data = validated_data.pop('data_source')
         data_source_obj = DataSource.objects.create(**data_source_data)
 
-        drug_obj = Drug.objects.get_or_create(manufacturer_name=manufacturer_obj,
-                            type=type_obj,
-                            pack_size_label=label_obj,
-                            short_composition=composition_obj,
-                            data_source=data_source_obj,
-                            **validated_data)
-        return drug_obj
+        try:
+            drug_obj = Drug.objects.get_or_create(manufacturer_name=manufacturer_obj,
+                                drug_type=type_obj,
+                                pack_size_label=label_obj,
+                                short_composition=composition_obj,
+                                data_source=data_source_obj,
+                                **validated_data)
+            return drug_obj
+        except Exception as e:
+            Response (e)
