@@ -28,20 +28,20 @@ class DataSourceSerializer(serializers.ModelSerializer):
 
 class DrugSerializer(serializers.ModelSerializer):
     manufacturer_name = ManufacturerSerializer()
-    type = DrugTypeSerializer()
+    drug_type = DrugTypeSerializer()
     pack_size_label = PackSizeSerializer()
     short_composition = DrugCompositionSerializer()
     data_source = DataSourceSerializer()
     
     class Meta:
-        fields = ('sku_id', 'name', 'manufacturer_name', 'type', 'pack_size_label', 'price', 'rx_required', 'short_composition', 'is_discontinued', 'data_source', 'created_on', 'modified_on')
+        fields = ('sku_id', 'name', 'manufacturer_name', 'drug_type', 'pack_size_label', 'price', 'rx_required', 'short_composition', 'is_discontinued', 'data_source')
         model = Drug
 
     def create(self, validated_data):
         manufacturer_data = validated_data.pop('manufacturer_name')
         manufacturer_obj = Manufacturer.objects.create(**manufacturer_data)
 
-        type_data = validated_data.pop('type')
+        type_data = validated_data.pop('drug_type')
         type_obj = DrugType.objects.create(**type_data)
 
         label_data = validated_data.pop('pack_size_label')

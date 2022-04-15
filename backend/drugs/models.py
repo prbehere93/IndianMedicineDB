@@ -36,7 +36,7 @@ class DataSource(TimeStampedModel):
         return self.label
 
 class DrugType(TimeStampedModel):
-    type = models.CharField(max_length=30, unique=True)
+    type_of_drug = models.CharField(max_length=30, unique=True)
 
     def __str__(self):
         return self.type
