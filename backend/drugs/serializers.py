@@ -21,7 +21,7 @@ class PackSizeSerializer(serializers.ModelSerializer):
 class DrugTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = DrugType
-        fields = ('type',)
+        fields = ('drug_type',)
         extra_kwargs = {
             'type': {'validators': []},
         }
@@ -60,7 +60,7 @@ class DrugSerializer(serializers.HyperlinkedModelSerializer):
         manufacturer_obj, _ = Manufacturer.objects.get_or_create(**manufacturer_data)
 
         type_data = validated_data.pop('drug_type')
-        type_obj = DrugType.objects.create(**type_data)
+        type_obj, _ = DrugType.objects.create(**type_data)
 
         label_data = validated_data.pop('pack_size_label')
         label_obj, _ = PackSizeLabel.objects.get_or_create(**label_data)
