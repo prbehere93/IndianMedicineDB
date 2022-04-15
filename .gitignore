@@ -5,3 +5,5 @@ media/
 *.sqlite3
 static
 Pipfile
+
+.venv
