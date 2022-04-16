@@ -30,7 +30,7 @@ class PackSizeLabel(TimeStampedModel):
 
 class DataSource(TimeStampedModel):
     name = models.CharField(max_length=50, unique=True)
-    url = models.URLField(null=True, blank=True) #how to show that the datasource was entered by a user?
+    source_url = models.URLField(null=True, blank=True) #how to show that the datasource was entered by a user?
     
     def __str__(self):
         return self.name
