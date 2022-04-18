@@ -57,24 +57,26 @@ class DrugSerializer(serializers.HyperlinkedModelSerializer):
 
     def create(self, validated_data):
         manufacturer_data = validated_data.pop('manufacturer_name')
-        manufacturer_obj, _ = Manufacturer.objects.get_or_create(**manufacturer_data)
+        manufacturer_obj = Manufacturer.objects.get_or_create(**manufacturer_data)
 
         type_data = validated_data.pop('drug_type')
-        type_obj, _ = DrugType.objects.create(**type_data)
+        type_obj = DrugType.objects.get_or_create(**type_data)
 
         label_data = validated_data.pop('pack_size_label')
-        label_obj, _ = PackSizeLabel.objects.get_or_create(**label_data)
+        label_obj = PackSizeLabel.objects.get_or_create(**label_data)
 
         composition_data = validated_data.pop('short_composition')
-        composition_obj, _ = DrugComposition.objects.get_or_create(**composition_data)
+        composition_obj = DrugComposition.objects.get_or_create(**composition_data)
 
         data_source_data = validated_data.pop('data_source')
-        data_source_obj, _ = DataSource.objects.get_or_create(**data_source_data)
+        data_source_obj = DataSource.objects.get_or_create(**data_source_data)
 
-        drug_obj, _ = Drug.objects.get_or_create(manufacturer_name=manufacturer_obj,
-                            drug_type=type_obj,
-                            pack_size_label=label_obj,
-                            short_composition=composition_obj,
-                            data_source=data_source_obj,
-                            **validated_data)
+        drug_obj = Drug(manufacturer_name=manufacturer_obj,
+                                drug_type=type_obj,
+                                pack_size_label=label_obj,
+                                short_composition=composition_obj,
+                                data_source=data_source_obj,
+                                **validated_data)
+        drug_obj.save()
+
         return drug_obj
