@@ -56,7 +56,6 @@ class DrugSerializer(serializers.HyperlinkedModelSerializer):
         model = Drug
 
     def create(self, validated_data):
-        print(validated_data)
         manufacturer_data = validated_data.pop('manufacturer_name')
         manufacturer_obj, _ = Manufacturer.objects.get_or_create(**manufacturer_data)
 
