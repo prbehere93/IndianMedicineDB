@@ -78,3 +78,30 @@ class DrugSerializer(serializers.HyperlinkedModelSerializer):
                             data_source=data_source_obj,
                             **validated_data)
         return drug_obj
+    
+    def update(self, instance, validated_data):
+        
+        manufacturer_data = validated_data.get('manufacturer_name', instance.manufacturer_name)
+        instance.manufacturer_name, _ = Manufacturer.objects.get_or_create(**manufacturer_data)
+
+        type_data = validated_data.get('drug_type', instance.drug_type)
+        instance.drug_type, _ = DrugType.objects.get_or_create(**type_data)
+
+        label_data = validated_data.get('pack_size_label', instance.pack_size_label)
+        instance.pack_size_label, _ = PackSizeLabel.objects.get_or_create(**label_data)
+
+        composition_data = validated_data.get('short_composition', instance.short_composition)
+        instance.short_composition, _ = DrugComposition.objects.get_or_create(**composition_data)
+
+        data_source_data = validated_data.get('data_source', instance.data_source)
+        instance.data_source, _ = DataSource.objects.get_or_create(**data_source_data)
+
+        instance.sku_id = validated_data.get('sku_id', instance.sku_id)
+        instance.name = validated_data.get('name', instance.name)
+        instance.price = validated_data.get('price', instance.price)
+        instance.rx_required = validated_data.get('rx_required', instance.rx_required)
+        instance.is_discontinued = validated_data.get('is_discontinued', instance.is_discontinued)
+        
+        instance.save()
+        
+        return instance
