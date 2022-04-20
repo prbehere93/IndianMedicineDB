@@ -1,0 +1,13 @@
+#staticfiles and pycache
+media/
+.vscode/
+*.pyc
+static
+
+#database related
+*.db
+*.sqlite3
+
+#virtual env related stuff
+Pipfile
+.venv
