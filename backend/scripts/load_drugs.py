@@ -25,12 +25,12 @@ def run():
                                                      manufacturer_name=manufacturer_name,
                                                      drug_type=drug_type,
                                                      pack_size_label=pack_size_label,
-                                                     price=round(row[5],2),
+                                                     price=round(float(row[5]),2),
                                                      rx_required=True if row[6] else False,
                                                      short_composition=short_composition,
                                                      is_discontinued=True if row[8]=="TRUE" else False,
                                                      data_source=data_source
                                                      )
-            drug.save()
+            print(f'{str(drug)}, was {created}')
     except Exception as e:
         print(f'Unable to load the data due to {e}')

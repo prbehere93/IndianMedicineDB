@@ -47,7 +47,7 @@ class Drug(TimeStampedModel):
     manufacturer_name = models.ForeignKey(to=Manufacturer, on_delete=models.PROTECT, related_name='manufacturer')
     drug_type = models.ForeignKey(to=DrugType, on_delete=models.PROTECT, related_name='drug_type')
     pack_size_label = models.ForeignKey(to=PackSizeLabel, on_delete=models.PROTECT, related_name='packsize')
-    price = models.DecimalField(max_digits=7, decimal_places=2, null=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     rx_required = models.BooleanField(verbose_name='Prescription Required', null=True)
     short_composition = models.ForeignKey(to=DrugComposition, on_delete=models.PROTECT, related_name='composition')
     is_discontinued = models.BooleanField()
