@@ -7,7 +7,7 @@ class ManufacturerSerializer(serializers.ModelSerializer):
         model = Manufacturer
         fields = ('name',)
         extra_kwargs = {
-            'name': {'validators': []},
+            'name': {'validators': []}, #validators are required because by default they only take unique values as input
         }
 
 class PackSizeSerializer(serializers.ModelSerializer):
