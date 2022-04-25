@@ -14,7 +14,7 @@ class DrugViewSet(viewsets.ModelViewSet):
     queryset = Drug.objects.prefetch_related('manufacturer_name', 'drug_type', 'pack_size_label', 'short_composition', 'data_source')
     serializer_class = DrugSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['manufacturer_name',]
-    search_fields = ['name','manufacturer_name__name','short_composition__short_composition']
+    filterset_fields = ['manufacturer_name','short_composition']
+    search_fields = ['name','manufacturer_name__name','short_composition__short_composition'] #the __can be used to search foreign key
 
 

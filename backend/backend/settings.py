@@ -42,8 +42,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'users.apps.UsersConfig',
     'drugs.apps.DrugsConfig',
-    'search',
-
+    
     # 3rd party
     'rest_framework',
     'django_extensions',
