@@ -3,9 +3,11 @@ from drugs.models import DataSource, Drug, DrugComposition, Manufacturer, DrugTy
 from pathlib import Path
 
 def run():
-    
+    #Idea for imporvement
+    #Import all pre-existing sku_ids present in the DB
+    #Use bulk_create, add only sku_ids i.e. not present in the preexisting DB to the list(queryset)
     try:
-        enc = 'utf-8-sig' #had to save_as the original file to a utf-8 compliant file
+        enc = 'utf-8-sig' #had to save_as the original file to a utf-8 compliant file 
         file_path=Path.cwd().parent.joinpath('drugs(batch1).csv')
         file_handler=open(file_path, encoding=enc)
         reader=csv.reader(file_handler)
@@ -17,6 +19,7 @@ def run():
             pack_size_label,created = PackSizeLabel.objects.get_or_create(label=row[4])
             short_composition,created = DrugComposition.objects.get_or_create(short_composition=row[7])
             
+            #since all of this data is internal, have created a single data source record/fk 
             data_source,created=DataSource.objects.get_or_create(name='internal',
                                                                  url='https://www.1mg.com/drugs-all-medicines')
             
