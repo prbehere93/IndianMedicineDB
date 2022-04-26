@@ -18,9 +18,8 @@ from django.urls import path, include
 from drugs.urls import router as drugrouter
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
-    path('api/auth/', include('djoser.urls.authtoken')),
-
-    path('api/v1/', include('api.urls')),
+    path("admin/", admin.site.urls),
+    path("api-auth/", include("rest_framework.urls")),
+    path("api/auth/", include("djoser.urls.authtoken")),
+    path("api/v1/", include("api.urls")),
 ]
