@@ -22,6 +22,7 @@ class DrugViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = ['manufacturer_name','short_composition']
     search_fields = ['name','manufacturer_name__name','short_composition__short_composition'] #the __can be used to search foreign key
+    
     # removing the 'delete' method from allowed methods
     # http_method_names = ['get', 'post', 'put', 'patch'] 
     
